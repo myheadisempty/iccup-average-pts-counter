@@ -93,7 +93,14 @@ export const getGameInfo = async (url: string, contestantNick: string) => {
             const kills = parseInt($(feeder).find(".kda-text.-green").text());
             const deaths = parseInt($(feeder).find(".kda-text.-red").text());
 
-            if (kills + 6 <= deaths) {
+            if (
+              (kills == 0 && deaths == 6) ||
+              (kills == 1 && deaths == 7) ||
+              (kills == 2 && deaths == 8) ||
+              (kills == 3 && deaths == 10) ||
+              (kills == 4 && deaths == 15) ||
+              (kills == 5 && deaths == 18)
+            ) {
               feeders.push({
                 nick: nick,
                 kills: kills,

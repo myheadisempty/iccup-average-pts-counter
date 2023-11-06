@@ -241,18 +241,20 @@ const Home = () => {
                     children: `+${pointsData.gameVictoryPoints} points`,
                   },
                   {
-                    children: `+${pointsData.itemBuildPoints} points`,
-                  },
-                  {
                     children: `+${pointsData.KDAScorePoints} points`,
                   },
                   {
-                    children: `Total points: ${points}`,
+                    children: `+${pointsData.itemBuildPoints} points`,
+                  },
+                  {
+                    children: `Total points: ${points.toFixed(1)}`,
                     className: "p-0",
                   },
                 ]}
               />
-              <Button onClick={handleSecondButtonClick}>Go back</Button>
+              <Button onClick={handleSecondButtonClick} type="default">
+                Go back
+              </Button>
             </div>
           </div>
         </div>

@@ -13,5 +13,9 @@ export const checkGameCompletion = (leavers: Leaver[]) => {
     }
   }
 
+  if (leavers.length === 0) {
+    points = 1;
+  }
+
   return points;
 };
