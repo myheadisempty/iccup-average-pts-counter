@@ -1,24 +1,25 @@
 import { Item } from "../types";
 
 export const calculateItemBuildPoints = (items: Item[]) => {
-  let itemsOver1751 = 0;
-  let itemsOver5k = 0;
-
-  for (const item of items) {
-    if (item.price > 1751 && item.price < 5000) {
-      itemsOver1751++;
-    }
-    if (item.price >= 5000) {
-      itemsOver5k++;
-    }
-  }
+  const itemsOver1751 = items.filter(
+    (item) => item.price > 1751 && item.price < 5000
+  ).length;
+  const itemsOver5k = items.filter((item) => item.price >= 5000).length;
 
   if (itemsOver1751 === 3 && itemsOver5k === 0) {
     return 1;
   }
 
+  if (itemsOver1751 === 2 && itemsOver5k === 1) {
+    return 1;
+  }
+
   if (itemsOver1751 === 1 && itemsOver5k === 2) {
     return 1;
+  }
+
+  if (itemsOver1751 === 0 && itemsOver5k === 3) {
+    return 2;
   }
 
   if (itemsOver1751 === 3 && itemsOver5k === 1) {
@@ -37,6 +38,10 @@ export const calculateItemBuildPoints = (items: Item[]) => {
     return 2;
   }
 
+  if (itemsOver1751 === 0 && itemsOver5k === 4) {
+    return 3;
+  }
+
   if (itemsOver1751 === 4 && itemsOver5k === 1) {
     return 3;
   }
@@ -46,6 +51,10 @@ export const calculateItemBuildPoints = (items: Item[]) => {
   }
 
   if (itemsOver1751 === 2 && itemsOver5k === 3) {
+    return 3;
+  }
+
+  if (itemsOver1751 === 1 && itemsOver5k === 3) {
     return 3;
   }
 
@@ -61,12 +70,28 @@ export const calculateItemBuildPoints = (items: Item[]) => {
     return 4;
   }
 
+  if (itemsOver1751 === 1 && itemsOver5k === 4) {
+    return 6;
+  }
+
+  if (itemsOver1751 === 0 && itemsOver5k === 5) {
+    return 5;
+  }
+
   if (itemsOver1751 === 3 && itemsOver5k === 3) {
     return 6;
   }
 
   if (itemsOver1751 === 2 && itemsOver5k === 4) {
     return 6;
+  }
+
+  if (itemsOver1751 === 0 && itemsOver5k === 6) {
+    return 7;
+  }
+
+  if (itemsOver1751 === 1 && itemsOver5k === 5) {
+    return 7;
   }
 
   return 0;
