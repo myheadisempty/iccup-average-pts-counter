@@ -17,7 +17,7 @@ export const calculateItemBuildPoints = (items: Item[]) => {
     return 1;
   }
 
-  if (itemsOver1751 === 2 && itemsOver5k === 1) {
+  if (itemsOver1751 === 1 && itemsOver5k === 2) {
     return 1;
   }
 

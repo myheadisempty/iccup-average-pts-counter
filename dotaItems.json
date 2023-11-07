@@ -85,6 +85,10 @@
       "price": 200
     },
     {
+      "name": "Magic Wand",
+      "price": 465
+    },
+    {
       "name": "Ring of Health",
       "price": 850
     },
@@ -755,10 +759,6 @@
     {
       "name": "Plate Mail",
       "price": 1400
-    },
-    {
-      "name": "Aegis of the Immortal",
-      "price": 0
     }
   ]
 }
