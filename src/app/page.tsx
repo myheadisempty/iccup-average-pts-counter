@@ -1,7 +1,8 @@
 "use client";
 
 import GameDetails from "@/components/GameDetails";
-import { Input, Button, Tabs, TabsProps } from "antd";
+import { Input, Button, Tabs, TabsProps, Checkbox } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { useState } from "react";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
   const [secondUrl, setSecondUrl] = useState("");
   const [nick, setNick] = useState("");
   const [inputVisible, setInputVisible] = useState(true);
+  const [isOneUrlInput, setIsOneUrlInput] = useState(false);
 
   const handleClick = () => {
     setInputVisible(false);
@@ -42,9 +44,19 @@ const Home = () => {
   return (
     <div className="m-2">
       {inputVisible && (
-        <form className="space-y-4">
+        <div className="space-y-4">
+          <Checkbox
+            checked={isOneUrlInput}
+            onChange={(e: CheckboxChangeEvent) =>
+              setIsOneUrlInput(e.target.checked)
+            }
+          >
+            Calculate for one game?
+          </Checkbox>
           <div>
-            <label htmlFor="firstUrl">Enter first game URL</label>
+            <label htmlFor="firstUrl">
+              Enter {!isOneUrlInput ? "first" : ""} game URL
+            </label>
             <div className="shadow-sm sm:max-w-md mb-2">
               <Input
                 name="firstUrl"
@@ -52,14 +64,18 @@ const Home = () => {
                 onChange={(e) => setFirstUrl(e.target.value)}
               />
             </div>
-            <label htmlFor="secondUrl">Enter second game URL</label>
-            <div className="shadow-sm sm:max-w-md mb-2">
-              <Input
-                name="secondUrl"
-                value={secondUrl}
-                onChange={(e) => setSecondUrl(e.target.value)}
-              />
-            </div>
+            {!isOneUrlInput && (
+              <>
+                <label htmlFor="secondUrl">Enter second game URL</label>
+                <div className="shadow-sm sm:max-w-md mb-2">
+                  <Input
+                    name="secondUrl"
+                    value={secondUrl}
+                    onChange={(e) => setSecondUrl(e.target.value)}
+                  />
+                </div>
+              </>
+            )}
             <label htmlFor="nick">Enter contestant nick</label>
             <div className="shadow-sm sm:max-w-md">
               <Input
@@ -70,9 +86,16 @@ const Home = () => {
             </div>
           </div>
           <Button onClick={handleClick}>Get info</Button>
-        </form>
+        </div>
       )}
-      {!inputVisible && <Tabs items={items} />}
+      {!inputVisible && !isOneUrlInput && <Tabs items={items} />}
+      {!inputVisible && isOneUrlInput && (
+        <GameDetails
+          url={firstUrl}
+          nick={nick}
+          updateInputVisible={setInputVisible}
+        />
+      )}
     </div>
   );
 };

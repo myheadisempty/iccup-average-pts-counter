@@ -246,9 +246,7 @@ const GameDetails: FC<GameDetailsProps> = ({
                   },
                 ]}
               />
-              <Button onClick={handleClick} type="default">
-                Go back
-              </Button>
+              <Button onClick={handleClick}>Go back</Button>
             </div>
           </div>
         </div>
