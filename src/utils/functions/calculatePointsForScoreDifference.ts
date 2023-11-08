@@ -5,7 +5,7 @@ export const calculatePointsForScoreDifference = (
   const scoreDifference = opposingTeamAvgScore - contestantScore;
   let points = 0;
 
-  if (scoreDifference >= 0 && contestantScore >= 2000) {
+  if (scoreDifference >= 0 && contestantScore >= 1500) {
     if (opposingTeamAvgScore > 8999) {
       points = (scoreDifference / 400) * 0.5;
     } else if (opposingTeamAvgScore > 5999) {
