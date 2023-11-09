@@ -8,7 +8,7 @@ import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Average pts counter",
+  title: "Player of the week",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

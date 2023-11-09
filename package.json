@@ -1,5 +1,5 @@
 {
-  "name": "average-pts-parser",
+  "name": "player-of-week",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.17.2",
+    "@reduxjs/toolkit": "^1.9.7",
     "antd": "^5.11.0",
     "cheerio": "^1.0.0-rc.12",
     "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "^8.1.3"
   },
   "devDependencies": {
     "@types/node": "^20",

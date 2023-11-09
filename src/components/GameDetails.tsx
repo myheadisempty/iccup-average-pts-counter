@@ -1,4 +1,5 @@
-import { PointsContext } from "@/utils/contexts/PointsContext";
+import { addPoints, resetPoints } from "@/store/slices/totalPointsSlice";
+import { RootState } from "@/store/store";
 import { calculateItemBuildPoints } from "@/utils/functions/calculateItemBuildPoints";
 import { calculatePointsForKDAScore } from "@/utils/functions/calculatePointsForKDAScore";
 import { calculatePointsForOpposingTeamAverage } from "@/utils/functions/calculatePointsForOpposingTeamAverage";
@@ -8,14 +9,8 @@ import { checkGameCompletion } from "@/utils/functions/checkGameCompletion";
 import { getGameInfo } from "@/utils/getGameInfo";
 import { GameData } from "@/utils/types";
 import { Button, Descriptions, DescriptionsProps, Timeline } from "antd";
-import {
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 type GameDetailsProps = {
   url: string;
@@ -28,8 +23,6 @@ const GameDetails: FC<GameDetailsProps> = ({
   nick,
   updateInputVisible,
 }) => {
-  const { points, addPoints, updatePoints } = useContext(PointsContext);
-
   const [gameData, setGameData] = useState<GameData>();
   const [pointsData, setPointsData] = useState({
     scoreDifferencePoints: 0,
@@ -42,6 +35,9 @@ const GameDetails: FC<GameDetailsProps> = ({
     itemBuildPoints: 0,
     KDAScorePoints: 0,
   });
+
+  const points = useSelector((state: RootState) => state.totalPoints.points);
+  const dispatch = useDispatch();
 
   const contestantInfo: DescriptionsProps["items"] = [
     {
@@ -167,11 +163,11 @@ const GameDetails: FC<GameDetailsProps> = ({
 
   useEffect(() => {
     calculateTotalPoints();
-    addPoints(totalPoints);
-  }, [gameData]);
+    dispatch(addPoints(totalPoints));
+  }, [gameData, totalPoints]);
 
   const handleClick = () => {
-    updatePoints(0);
+    dispatch(resetPoints());
     updateInputVisible(true);
   };
 

@@ -1,22 +1,11 @@
 "use client";
 
-import { PointsContext } from "@/utils/contexts/PointsContext";
-import { FC, PropsWithChildren, useState } from "react";
+import { store } from "@/store/store";
+import { FC, PropsWithChildren } from "react";
+import { Provider } from "react-redux";
 
 const Providers: FC<PropsWithChildren> = ({ children }) => {
-  const [points, setPoints] = useState(0);
-
-  const addPoints = (points: number) => {
-    setPoints((prevPoints) => prevPoints + points);
-  };
-
-  return (
-    <PointsContext.Provider
-      value={{ points, addPoints, updatePoints: setPoints }}
-    >
-      {children}
-    </PointsContext.Provider>
-  );
+  return <Provider store={store}>{children}</Provider>;
 };
 
 export default Providers;
